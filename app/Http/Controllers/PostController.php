@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     //列表页面
-	public function index(){}
+	public function index(){
+		return view('post/index');
+	}
 
 	//详情页面
 	public function show(){}
