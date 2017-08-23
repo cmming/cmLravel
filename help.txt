@@ -1,0 +1,23 @@
+1.migration 使用说明
+
+    php artisan make:migration create_tablename_table   (创建一个表格)
+
+    php artisan migrate (执行migrations 文件夹里面 所有的 数据库迁移版本)
+
+    php artisan tinker (用来直接模拟 modal对象的 的数据库操作)
+        1.1  $post = new \App\Post();
+             $post->title = '';
+             $post->content = '';
+             $post->user_id = '';
+
+             $post->save();(保存) 或者修改
+
+             $post->find(1);(根据 主键 进行搜索)
+
+             $post::where("key","value")->first(); 找到第一个 数据
+
+             $post::where("key","value")->first()->delete(); 找到第一个并且删除掉。
+
+             factory(App\)
+
+

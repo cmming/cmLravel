@@ -15,11 +15,14 @@ class CreatePostsTable extends Migration
     public function up()
     {
         //
-        Schema::create('post',function(Blueprint $table){
+        Schema::create('posts',function(Blueprint $table){
+            // 自增 id
             $table ->increments('id');
-            $table->string('title', 100);
+            // varchar -> string    default 设置默认值
+            $table->string('title', 100)->default("");
             $table->text('content');
-            $table->integer('user_id');
+            // 外键 int 型
+            $table->integer('user_id')->default(0);
             $table->timestamps();
 
         });

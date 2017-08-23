@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    //模型默认 会zhi
+    // protected Post
+    // 测试 post 这个类是否好用 使用tinker
 }

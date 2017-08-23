@@ -14,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        //函数启动之后会执行  设置string 的默认长度 为191
         Schema::defaultStringLength(191);
     }
 
