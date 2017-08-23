@@ -1,3 +1,5 @@
+0. php artisan key:generate  
+
 1.migration 使用说明
 
     php artisan make:migration create_tablename_table   (创建一个表格)

@@ -32,10 +32,20 @@ class PostController extends Controller
 	//具体的创建逻辑
 	public function store(){
 		// dd(request('title'));
-		$post = new Post();
-		$post->title = request('title');
-		$post->content = request('content');
-		$post->save();
+		// $post = new Post();
+		// $post->title = request('title');
+		// $post->content = request('content');
+		// $post->save();
+		// $post = Post::create(['title'=>request('title'),'content'=>request('content')]);
+
+		// 数据进行验证
+		$this->validate(request(),[
+			'title'=>'required|string|max:100|min:3',
+			'content'=>'required|string|min:10',
+		]);
+		$post = Post::create(request(['title','content']));
+
+		return redirect("/posts");
 	}
 
 	//edit
