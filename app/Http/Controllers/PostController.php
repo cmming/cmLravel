@@ -59,4 +59,6 @@ class PostController extends Controller
 
 	//删除
 	public function delete(){}
+	// 图片 上传
+	public function imageUpload(){}
 }

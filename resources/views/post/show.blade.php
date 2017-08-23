@@ -17,7 +17,7 @@
 
             <p class="blog-post-meta">{{$post->created_at}} by <a href="#">{{$post->user_id}}</a></p>
 
-            <p><p>{{$post->content}}
+            <p><p>{!!$post->content!!}
             <div>
                 <a href="{{url('/posts/'.$post->id.'/zan')}}" type="button" class="btn btn-primary btn-lg">赞</a>
 

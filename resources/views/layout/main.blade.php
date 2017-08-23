@@ -7,7 +7,8 @@
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta name="csrf-token" content="MESUY3topeHgvFqsy9EcM916UWQq6khiGHM91wHy">
+    {{--  <meta name="csrf-token" content="MESUY3topeHgvFqsy9EcM916UWQq6khiGHM91wHy">  --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}" /> 
 
 
     <title>laravel for blog</title>
@@ -54,7 +55,7 @@
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
                 <div>
-                    <img src="/storage/9f0b0809fd136c389c20f949baae3957/iBkvipBCiX6cHitZSdTaXydpen5PBiul7yYCc88O.jpeg" alt="" class="img-rounded" style="border-radius:500px; height: 30px">
+                    <img src="" alt="" class="img-rounded" style="border-radius:500px; height: 30px">
                     <a href="#" class="blog-nav-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kassandra Ankunding2  <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="/user/5">我的主页</a></li>

@@ -35,6 +35,8 @@ Route::get("/posts",'\App\Http\Controllers\PostController@index');
 //创建
 Route::post("/posts","\App\Http\Controllers\PostController@store");
 Route::get("/posts/create","\App\Http\Controllers\PostController@create");
+// 图片上传
+Route::get("/posts/image/upload","\App\Http\Controllers\PostController@imageUpload");
 
 //2.文章的详情页面 
 
