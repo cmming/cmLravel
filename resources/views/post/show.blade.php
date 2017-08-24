@@ -7,15 +7,19 @@
         <div class="blog-post">
             <div style="display:inline-flex">
                 <h2 class="blog-post-title">{{$post->title}}</h2>
+                @can('update', $post)
                 <a style="margin: auto"  href="{{ url('/posts/'.$post->id.'/edit') }}">
                     <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 </a>
-                <a style="margin: auto"  href="{{ url('/posts/'.$post->id.'/edit') }}">
+                @endcan
+                @can('delete', $post)
+                <a style="margin: auto"  href="{{ url('/posts/'.$post->id.'/delete') }}">
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                 </a>
+                 @endcan
             </div>
 
-            <p class="blog-post-meta">{{$post->created_at}} by <a href="#">{{$post->user_id}}</a></p>
+            <p class="blog-post-meta">{{$post->created_at}} by <a href="#">{{$post->user->name}}</a></p>
 
             <p><p>{!!$post->content!!}
             <div>

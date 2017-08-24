@@ -23,3 +23,10 @@
              factory(App\)
 
 
+2.Auth 用户登录状态管理类
+
+
+3.策略类 policy 
+
+    php artisan make:policy PostPolicy
+

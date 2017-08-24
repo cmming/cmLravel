@@ -38,7 +38,8 @@
             @foreach($posts as $post)
                 <div class="blog-post">
                     <h2 class="blog-post-title"><a href="{{url('/posts/'.$post->id)}}" >{!!$post['title']!!}</a></h2>
-                    <p class="blog-post-meta">{{$post['updated_at']}}<a href="/user/5">{{$post['user_id']}}</a></p>
+                    <p class="blog-post-meta">{{$post['updated_at']}}
+                    <a href="/user/5"> {{$post->user->name}}</a></p>
 
                     <p>{!!str_limit($post['content'],100)!!}
                     <p class="blog-post-meta">赞 0  | 评论 0</p>

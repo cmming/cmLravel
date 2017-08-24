@@ -43,7 +43,12 @@ class PostController extends Controller
 			'title'=>'required|string|max:100|min:3',
 			'content'=>'required|string|min:10',
 		]);
-		$post = Post::create(request(['title','content']));
+		// 添加用户
+		$user_id = \Auth::id();
+		$parpams = array_merge(request(['title','content']),compact('user_id'));
+
+		// dd($parpams);
+		$post = Post::create($parpams);
 
 		return redirect("/posts");
 	}
@@ -55,10 +60,35 @@ class PostController extends Controller
     }
 
 	//编辑的逻辑
-	public function update(){}
+	public function update(Request $request, Post $post){
+		// 数据验证
+		 $this->validate($request, [
+            'title' => 'required|max:255|min:4',
+            'content' => 'required|min:10',
+        ]);
+
+		// 编辑权限的添加
+		$this->authorize('update',$post);
+
+        $post->update(request(['title', 'content']));
+        return redirect("/posts/{$post->id}");
+	}
 
 	//删除
-	public function delete(){}
+	public function delete(Post $post){
+
+		// TODO 用户的 权限
+		// 编辑权限的添加
+		$this->authorize('delete',$post);
+		
+		$post->delete();
+
+		return redirect('/posts');
+	}
 	// 图片 上传
-	public function imageUpload(){}
+	public function imageUpload(Request $request){
+		$path = $request->file('wangEditorH5File')->storePublicly(md5(\Auth::id() . time()));
+		// dd($path);
+        return asset('storage/'. $path);
+	}
 }

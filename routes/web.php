@@ -27,6 +27,23 @@ Route::get('/','\APP\Http\Controllers\LoginController@index');
  * 路由传递对象的时候 也应该是用单数形式 要不报错
  */
 
+// 页面的注册
+Route::get("/register",'\App\Http\Controllers\RegisterController@index');
+// 注册的行为
+Route::post("/register",'\App\Http\Controllers\RegisterController@register');
+// 登录页面
+Route::get("/login",'\App\Http\Controllers\LoginController@index');
+// 登录行为
+Route::post("/login",'\App\Http\Controllers\LoginController@login');
+// 登出行为
+Route::get("/logout",'\App\Http\Controllers\LoginController@logout');
+// 个人 设置 中心
+Route::get("/user/me/setting",'\App\Http\Controllers\UserController@index');
+// 个人 设置 操作
+Route::post("/user/me/setting",'\App\Http\Controllers\UserController@settingStore');
+
+
+
 //1.列表页面
 Route::get("/posts",'\App\Http\Controllers\PostController@index');
 
@@ -48,7 +65,7 @@ Route::get("/posts/{post}/edit","\App\Http\Controllers\PostController@edit");
 Route::put("/posts/{post}","\App\Http\Controllers\PostController@update");
 
 //删除
-Route::get("/posts/delete","\App\Http\Controllers\PostController@delete");
+Route::get("/posts/{post}/delete","\App\Http\Controllers\PostController@delete");
 
 
 
