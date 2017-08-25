@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Post;
+use \App\Comment;
+use \App\Zan;
 
 class PostController extends Controller
 {
@@ -16,12 +18,14 @@ class PostController extends Controller
 		// ];
 		// $topics = [];
 		//
-		$posts = Post::OrderBy("created_at",'desc')->paginate(6);
+		$posts = Post::OrderBy("created_at",'desc')->withCount(['comments','zans'])->paginate(6);
 		return view('post/index',compact('posts'));
 	}
 
 	//详情页面
 	public function show(Post $post){
+		// 预加载 文章 模型中奖 评论的 作者 进行预加载
+		$post->load('comments');
 		return view('post/show',compact('post'));
 	}
 
@@ -38,6 +42,9 @@ class PostController extends Controller
 		// $post->save();
 		// $post = Post::create(['title'=>request('title'),'content'=>request('content')]);
 
+		if(!\Auth::check()){
+			return \Redirect::back()->withErrors("必须登录才能写文章！");
+		}
 		// 数据进行验证
 		$this->validate(request(),[
 			'title'=>'required|string|max:100|min:3',
@@ -82,6 +89,10 @@ class PostController extends Controller
 		$this->authorize('delete',$post);
 		
 		$post->delete();
+		// 同时要进行关联删除
+		$post->zan(\Auth::id())->delete();
+		// 关联删除 相关的 评论
+		$post->comments()->delete();
 
 		return redirect('/posts');
 	}
@@ -90,5 +101,48 @@ class PostController extends Controller
 		$path = $request->file('wangEditorH5File')->storePublicly(md5(\Auth::id() . time()));
 		// dd($path);
         return asset('storage/'. $path);
+	}
+
+	// 提交 评论
+	public function comment(Post $post){
+
+		// 权限验证
+		if(!\Auth::check()){
+			return \Redirect::back()->withErrors("必须登录才能评论！");
+		}
+
+		// 验证
+		$this->validate(request(), [
+            'content' => 'required|min:10',
+        ]);
+		// 提交
+		// 处理数据
+		$comment = new Comment();
+		$comment->user_id = \Auth()->id();
+		$comment->content = request('content');
+
+		$post->comments()->save($comment);
+		// 重定向
+
+		return back();
+	}
+
+	public function zan(Post $post){
+		if(!\Auth::check()){
+			return \Redirect::back()->withErrors("必须登录才能点赞！");
+		}
+		$params = [
+			'user_id'=>\Auth::id(),
+			'post_id'=>$post->id
+		];
+		// dd($params);
+		Zan::firstOrCreate($params);
+		return back();
+	}
+	public function unzan(Post $post){
+		// post 的zan 模型
+		$post->zan(\Auth::id())->delete();
+
+		return back();
 	}
 }

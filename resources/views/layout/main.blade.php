@@ -54,6 +54,7 @@
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
                 <div>
+                    @if(\Auth::check())
                     <img src="" alt="" class="img-rounded" style="border-radius:500px; height: 30px">
                     <a href="#" class="blog-nav-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{Auth::user()->name}}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -61,6 +62,15 @@
                         <li><a href="{{url('/user/5/setting')}}">个人设置</a></li>
                         <li><a href="{{url('/logout')}}">登出</a></li>
                     </ul>
+
+                    @else
+                        <a href="#" class="blog-nav-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">未登录<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{url('/register')}}">注册</a></li>
+                            <li><a href="{{url('/login')}}">登录</a></li>
+                        </ul>
+                    @endif
+
                 </div>
             </li>
         </ul>

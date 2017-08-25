@@ -26,4 +26,20 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    // 获取 自己
+    public function fans(){
+        return $this->hasMany('App\Fan','start_id','id');
+    }
+
+    // 获取 自己的粉丝
+    public function stars(){
+        return $this->hasMany('App\Fan','fan_id','id');
+    }
+
+    // 关联 文章模型
+
+    public function posts(){
+        return $this->hasMany('App\Post');
+    }
 }
