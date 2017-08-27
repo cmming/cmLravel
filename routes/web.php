@@ -77,5 +77,24 @@ Route::post("/posts/{post}/comment",'\App\Http\Controllers\PostController@commen
 Route::get("/posts/{post}/zan",'\App\Http\Controllers\PostController@zan');
 Route::get("/posts/{post}/unzan",'\App\Http\Controllers\PostController@unzan');
 
+// 个人中心
+Route::get("/user/{user}",'\App\Http\Controllers\UserController@index');
+
+
+// 个人设置 页面
+Route::get("/user/{user}/setting",'\App\Http\Controllers\UserController@setting');
+//关注一个用户
+Route::post("/user/{user}/fan",'\App\Http\Controllers\UserController@fan');
+Route::post("/user/{user}/unFan",'\App\Http\Controllers\UserController@unFan');
+
+//文章专题的详情页面 路由
+Route::get("/topic/{topic}",'\App\Http\Controllers\TopicController@show');
+
+//文章专题投稿
+Route::post("/topic/{topic}/submit",'\App\Http\Controllers\TopicController@submit');
+
+
+
+
 
 

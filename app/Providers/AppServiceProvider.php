@@ -16,6 +16,11 @@ class AppServiceProvider extends ServiceProvider
     {
         //函数启动之后会执行  设置string 的默认长度 为191
         Schema::defaultStringLength(191);
+        //添加 视图合成器材
+        \View::composer('layout.main',function ($view){
+            $topics = \App\Topic::all();
+            $view->with('topics',$topics);
+        });
     }
 
     /**

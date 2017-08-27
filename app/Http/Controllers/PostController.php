@@ -11,13 +11,6 @@ class PostController extends Controller
 {
     //列表页面
 	public function index(){
-		// $posts =[
-		// 	['title' => 'this is title1'],
-		// 	['title' => 'this is title2'],
-		// 	['title' => 'this is title3'],
-		// ];
-		// $topics = [];
-		//
 		$posts = Post::OrderBy("created_at",'desc')->withCount(['comments','zans'])->paginate(6);
 		return view('post/index',compact('posts'));
 	}

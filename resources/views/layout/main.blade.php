@@ -7,7 +7,7 @@
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta name="csrf-token" content="{{ csrf_token() }}" /> 
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
 
 
     <title>laravel for blog</title>
@@ -55,16 +55,18 @@
             <li class="dropdown">
                 <div>
                     @if(\Auth::check())
-                    <img src="" alt="" class="img-rounded" style="border-radius:500px; height: 30px">
-                    <a href="#" class="blog-nav-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{Auth::user()->name}}<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{url('/user/5')}}">我的主页</a></li>
-                        <li><a href="{{url('/user/5/setting')}}">个人设置</a></li>
-                        <li><a href="{{url('/logout')}}">登出</a></li>
-                    </ul>
+                        <img src="" alt="" class="img-rounded" style="border-radius:500px; height: 30px">
+                        <a href="#" class="blog-nav-item dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false">{{Auth::user()->name}}<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{url('/user/'.\Auth::id())}}">我的主页</a></li>
+                            <li><a href="{{url('/user/'.\Auth::id().'/setting')}}">个人设置</a></li>
+                            <li><a href="{{url('/logout')}}">登出</a></li>
+                        </ul>
 
                     @else
-                        <a href="#" class="blog-nav-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">未登录<span class="caret"></span></a>
+                        <a href="#" class="blog-nav-item dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false">未登录<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{url('/register')}}">注册</a></li>
                             <li><a href="{{url('/login')}}">登录</a></li>
@@ -98,8 +100,44 @@
                     <p>
                         <strong><a href="/">简书网站</a></strong> 基于 Laravel5.4 构建
                     </p>
-                    <div class="bdsharebuttonbox bdshare-button-style0-24" data-bd-bind="1494580268777"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_bdhome" data-cmd="bdhome" title="分享到百度新首页"></a></div>
-                    <script>window._bd_share_config={"common":{"bdSnsKey":{"tsina":"120473611"},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{},"image":{"viewList":["tsina","renren","douban","weixin","qzone","tqq","bdhome"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","renren","douban","weixin","qzone","tqq","bdhome"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+                    <div class="bdsharebuttonbox bdshare-button-style0-24" data-bd-bind="1494580268777"><a href="#"
+                                                                                                           class="bds_more"
+                                                                                                           data-cmd="more"></a><a
+                                href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#"
+                                                                                                   class="bds_renren"
+                                                                                                   data-cmd="renren"
+                                                                                                   title="分享到人人网"></a><a
+                                href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#"
+                                                                                                    class="bds_weixin"
+                                                                                                    data-cmd="weixin"
+                                                                                                    title="分享到微信"></a><a
+                                href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#"
+                                                                                                   class="bds_tqq"
+                                                                                                   data-cmd="tqq"
+                                                                                                   title="分享到腾讯微博"></a><a
+                                href="#" class="bds_bdhome" data-cmd="bdhome" title="分享到百度新首页"></a></div>
+                    <script>window._bd_share_config = {
+                            "common": {
+                                "bdSnsKey": {"tsina": "120473611"},
+                                "bdText": "",
+                                "bdMini": "2",
+                                "bdMiniList": false,
+                                "bdPic": "",
+                                "bdStyle": "0",
+                                "bdSize": "24"
+                            },
+                            "share": {},
+                            "image": {
+                                "viewList": ["tsina", "renren", "douban", "weixin", "qzone", "tqq", "bdhome"],
+                                "viewText": "分享到：",
+                                "viewSize": "16"
+                            },
+                            "selectShare": {
+                                "bdContainerClass": null,
+                                "bdSelectMiniList": ["tsina", "renren", "douban", "weixin", "qzone", "tqq", "bdhome"]
+                            }
+                        };
+                        with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
                 </div>
             </aside>
             <aside id="widget-categories" class="widget panel panel-default">
@@ -108,27 +146,23 @@
                 </div>
 
                 <ul class="category-root list-group">
-                    <li class="list-group-item">
-                        <a href="/topic/1">旅游
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="/topic/2">轻松
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="/topic/5">测试专题
-                        </a>
-                    </li>
+                    @foreach($topics as $topic)
+                        <li class="list-group-item">
+                            <a href="{{url('/topic/'.$topic->id)}}">{{$topic->name}}
+                            </a>
+                        </li>
+                    @endforeach
                 </ul>
 
             </aside>
         </div>
-    </div>    </div><!-- /.row -->
+    </div>
+</div><!-- /.row -->
 </div><!-- /.container -->
 
 <footer class="blog-footer">
-    <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+    <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a
+                href="https://twitter.com/mdo">@mdo</a>.</p>
     <p>
         <a href="#">Back to top</a>
     </p>

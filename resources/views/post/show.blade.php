@@ -19,9 +19,9 @@
                  @endcan
             </div>
 
-            <p class="blog-post-meta">{{$post->created_at}} by <a href="#">{{$post->user->name}}</a></p>
+            <p class="blog-post-meta">{{$post->created_at}} by <a href="{{url('/user/'.$post->user->id)}}">{{$post->user->name}}</a></p>
 
-            <p>{!!$post->content!!}</<p>
+            <p>{!!$post->content!!}</p>
             <div>
                  @if (\Auth::check()) 
                         @if ($post->zan(\Auth::id())->exists())
