@@ -41,6 +41,13 @@ class Post extends Model
             $q->where('topic_id',$topic_id);
         });
     }
+    //使用全局 scope
+    protected static function boot(){
+        parent::boot();
+        static::addGlobalScope('avaible',function(Builder $builder){
+            $builder->whereIn('status',[0,1]);
+        });
+    }
 
 
 }

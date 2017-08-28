@@ -1,18 +1,20 @@
-var editor = new wangEditor('content');
-var api_base_url = 'http://127.0.0.1/laravel/ldg/public/';
+var api_base_url = 'http://192.168.0.88/laravel/ldg/blog/public/';
 $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 })
-editor.config.uploadImgUrl = api_base_url+'/posts/image/upload';
-
+var editor = new wangEditor('content');
+if(editor.config!=undefined){
+    (editor.config.uploadImgUrl = api_base_url+'/posts/image/upload');
 // 设置 headers（举例）
-editor.config.uploadHeaders = {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-};
+    editor.config.uploadHeaders = {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    };
 
-editor.create();
+    editor.create();
+}
+
 
 //为 关注 人
 
@@ -39,7 +41,6 @@ $('.like-button').on('click', function () {
             method: 'POST',
             dataType: 'json',
             success: function (data) {
-                console.log(data.error);
                 if (data.error == 0) {
                     $(me).attr('like-value', 1);
                     $(me).text('取消关注');

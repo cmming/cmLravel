@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        //定义 一个admin 的 守卫
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
 
         'api' => [
             'driver' => 'token',
@@ -69,7 +74,12 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
-
+        //创建一个 provider
+        'admins' => [
+            //使用模型进行验证
+            'driver' => 'eloquent',
+            'model' => App\AdminUser::class,
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

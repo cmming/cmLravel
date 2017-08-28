@@ -32,66 +32,55 @@ Route::get("/register",'\App\Http\Controllers\RegisterController@index');
 // 注册的行为
 Route::post("/register",'\App\Http\Controllers\RegisterController@register');
 // 登录页面
-Route::get("/login",'\App\Http\Controllers\LoginController@index');
+Route::get("/login",'\App\Http\Controllers\LoginController@index')->name('login');
 // 登录行为
 Route::post("/login",'\App\Http\Controllers\LoginController@login');
 // 登出行为
 Route::get("/logout",'\App\Http\Controllers\LoginController@logout');
-// 个人 设置 中心
-Route::get("/user/me/setting",'\App\Http\Controllers\UserController@index');
-// 个人 设置 操作
-Route::post("/user/me/setting",'\App\Http\Controllers\UserController@settingStore');
 
 
-
-//1.列表页面
-Route::get("/posts",'\App\Http\Controllers\PostController@index');
-
-
-
-//创建
-Route::post("/posts","\App\Http\Controllers\PostController@store");
-Route::get("/posts/create","\App\Http\Controllers\PostController@create");
-// 图片上传
-Route::get("/posts/image/upload","\App\Http\Controllers\PostController@imageUpload");
-
-//2.文章的详情页面 
-
-Route::get("/posts/{post}","\App\Http\Controllers\PostController@show");
-
-//编辑
-Route::get("/posts/{post}/edit","\App\Http\Controllers\PostController@edit");
-//提交
-Route::put("/posts/{post}","\App\Http\Controllers\PostController@update");
-
-//删除
-Route::get("/posts/{post}/delete","\App\Http\Controllers\PostController@delete");
+Route::group(['middleware' => 'auth:web'], function() {
+	// 个人 设置 中心
+	Route::get("/user/me/setting", '\App\Http\Controllers\UserController@index');
+	// 个人 设置 操作
+	Route::post("/user/me/setting", '\App\Http\Controllers\UserController@settingStore');
 
 
-// 提交评论
+	//1.列表页面
+	Route::get("/posts", '\App\Http\Controllers\PostController@index');
+	//创建
+	Route::post("/posts", "\App\Http\Controllers\PostController@store");
+	Route::get("/posts/create", "\App\Http\Controllers\PostController@create");
+	// 图片上传
+	Route::get("/posts/image/upload", "\App\Http\Controllers\PostController@imageUpload");
+	//2.文章的详情页面
+	Route::get("/posts/{post}", "\App\Http\Controllers\PostController@show");
+	//编辑
+	Route::get("/posts/{post}/edit", "\App\Http\Controllers\PostController@edit");
+	//提交
+	Route::put("/posts/{post}", "\App\Http\Controllers\PostController@update");
+	//删除
+	Route::get("/posts/{post}/delete", "\App\Http\Controllers\PostController@delete");
+	// 提交评论
+	Route::post("/posts/{post}/comment", '\App\Http\Controllers\PostController@comment');
+	// 赞
+	Route::get("/posts/{post}/zan", '\App\Http\Controllers\PostController@zan');
+	Route::get("/posts/{post}/unzan", '\App\Http\Controllers\PostController@unzan');
+	// 个人中心
+	Route::get("/user/{user}", '\App\Http\Controllers\UserController@index');
+	// 个人设置 页面
+	Route::get("/user/{user}/setting", '\App\Http\Controllers\UserController@setting');
+	//关注一个用户
+	Route::post("/user/{user}/fan", '\App\Http\Controllers\UserController@fan');
+	Route::post("/user/{user}/unFan", '\App\Http\Controllers\UserController@unFan');
+	//文章专题的详情页面 路由
+	Route::get("/topic/{topic}", '\App\Http\Controllers\TopicController@show');
+	//文章专题投稿
+	Route::post("/topic/{topic}/submit", '\App\Http\Controllers\TopicController@submit');
 
-Route::post("/posts/{post}/comment",'\App\Http\Controllers\PostController@comment');
-
-
-// 赞
-Route::get("/posts/{post}/zan",'\App\Http\Controllers\PostController@zan');
-Route::get("/posts/{post}/unzan",'\App\Http\Controllers\PostController@unzan');
-
-// 个人中心
-Route::get("/user/{user}",'\App\Http\Controllers\UserController@index');
-
-
-// 个人设置 页面
-Route::get("/user/{user}/setting",'\App\Http\Controllers\UserController@setting');
-//关注一个用户
-Route::post("/user/{user}/fan",'\App\Http\Controllers\UserController@fan');
-Route::post("/user/{user}/unFan",'\App\Http\Controllers\UserController@unFan');
-
-//文章专题的详情页面 路由
-Route::get("/topic/{topic}",'\App\Http\Controllers\TopicController@show');
-
-//文章专题投稿
-Route::post("/topic/{topic}/submit",'\App\Http\Controllers\TopicController@submit');
+});
+//添加管理后台的路由
+include_once "admin.php";
 
 
 
