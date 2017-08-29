@@ -2,7 +2,6 @@
 @extends('admin.layout.main')
 @section('content')
     <div class="content-wrapper">
-
         <!-- Main content -->
         <section class="content">
             <!-- Small boxes (Stat box) -->
@@ -15,46 +14,26 @@
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
-                            <form action="/admin/roles/1/permission" method="POST">
-                                <input type="hidden" name="_token" value="RPPMc0lhvtynKELDZljXlz9UZI9uNc55ip1P8GCM">
+                            <form action="{{url('/admin/roles/'.$role->id.'/premission')}}" method="POST">
+                                {{csrf_field()}}
                                 <div class="form-group">
+                                    @foreach($AdminPremissions as $AdminPremission)
                                     <div class="checkbox">
                                         <label>
                                             <input type="checkbox" name="permissions[]"
+                                                    @if($rolePremissions->contains($AdminPremission))
                                                    checked
-                                                   value="1">
-                                            system
+                                                   @endif
+                                                   value="{{$AdminPremission->id}}">
+                                            {{$AdminPremission->name}}
                                         </label>
                                     </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="permissions[]"
-                                                   checked
-                                                   value="2">
-                                            post
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="permissions[]"
-                                                   value="3">
-                                            topic
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="permissions[]"
-                                                   value="4">
-                                            notice
-                                        </label>
-                                    </div>
+                                    @endforeach
                                 </div>
                                 <div class="box-footer">
                                     <button type="submit" class="btn btn-primary">提交</button>
                                 </div>
                             </form>
-
-
                         </div>
                     </div>
                 </div>

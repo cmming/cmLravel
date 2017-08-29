@@ -19,7 +19,7 @@ class AdminRole extends Model
 	}
 	//删除 角色中的一个权限
 	public function deletePremission($premission){
-		return $this->premissions()-detach($premission);
+		return $this->premissions()->detach($premission);
 	}
 	//判断 角色是否 拥有一个权限
 	public function hasPremission($premission){

@@ -37,35 +37,35 @@ class UserController extends Controller
 		return redirect('/admin/users');
 	}
 	//用户角色页面
-	public function role(AdminUser $AdminUser){
+	public function role(AdminUser $user){
 		//获取所有的角色
 		$roles = AdminRole::all();
 		//获取当前 user 拥有的权限
-		$myroles = $AdminUser->roles;
-		return view('admin/user/role',compact(['roles','myroles','AdminUser']));
+		$myroles = $user->roles;
+		return view('admin/user/role',compact(['roles','myroles','user']));
 	}
 	//修改用户的角色行为
-	public function roleStore(AdminUser $AdminUser){
+	public function roleStore(AdminUser $user){
 		$this->validate(request(),[
 			'roles'=>'required|array',
 		]);
-		//
-		$roles = AdminRole::findMany(request('roles'));
-		//已经拥有的角色
-		$myRoles = $AdminUser->roles;
-		//要增加
-		$addRoles = $roles->diff($myRoles);
+		//选中的所遇角色
+        $roles = AdminRole::findMany(request('roles'));
+        //已经拥有的角色
+        $myRoles = $user->roles;
+        //要增加
+        $addRoles = $roles->diff($myRoles);
 
-		foreach($addRoles as $addRole){
-			$AdminUser->assignRole($addRole);
+        foreach($addRoles as $addRole){
+            $user->assignRole($addRole);
 		}
 		//要删除的
 		$deleteRoles = $myRoles->diff($roles);
 		foreach($deleteRoles as $deleteRole){
-			$AdminUser->deleteRole($deleteRole);
+            $user->deleteRole($deleteRole);
 		}
 
-		return back();
+		return redirect('/admin/users');
 
 	}
 }

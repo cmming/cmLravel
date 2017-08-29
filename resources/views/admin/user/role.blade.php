@@ -15,7 +15,7 @@
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
-                            <form action="{{url('/admin/users/'.$AdminUser->id.'/role')}}" method="POST">
+                            <form action="{{url('/admin/users/'.$user->id.'/role')}}" method="POST">
                                 {{csrf_field()}}
                                 <div class="form-group">
                                     @foreach($roles as $role)

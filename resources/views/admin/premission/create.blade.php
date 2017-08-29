@@ -18,8 +18,8 @@
                             <!-- /.box-header -->
                             <!-- form start -->
                             <form role="form" action="
-                             @if($Premission->id)
-                            {{url('/admin/premission/edit')}}
+                             @if($page_type == 'edit')
+                            {{url('/admin/premission/'.$Premission->id.'/editStore')}}
                             @else
                             {{url('/admin/premission/store')}}
                             @endif
@@ -28,10 +28,17 @@
                                 <div class="box-body">
                                     <div class="form-group">
                                         <label >权限名</label>
+                                        <input type="hidden" class="form-control" name="id"
+                                        {{--判断是否为修改页面--}}
+                                               value =
+                                                @if($page_type == 'edit')
+                                                    {{$Premission->id}}
+                                                @endif
+                                        >
                                         <input type="text" class="form-control" name="name"
                                         {{--判断是否为修改页面--}}
                                                value =
-                                                @if($Premission->id)
+                                                @if($page_type == 'edit')
                                                     {{$Premission->name}}
                                                 @endif
                                         >
@@ -42,7 +49,7 @@
                                         <label>描述</label>
                                         <input type="text" class="form-control" name="desc"
                                                value =
-                                                @if($Premission->id)
+                                                @if($page_type == 'edit')
                                                     {{$Premission->desc}}
                                                 @endif
                                         >

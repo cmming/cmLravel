@@ -26,7 +26,7 @@ Route::group(['prefix'=>'admin'],function(){
 		//一个用户的角色
 		Route::get('/users/{user}/role','\App\Admin\Controllers\UserController@role');
 		//修改用户的角色
-		Route::get('/users/{user}/roleStore','\App\Admin\Controllers\UserController@roleStore');
+		Route::post('/users/{user}/role','\App\Admin\Controllers\UserController@roleStore');
 
 
 		//角色
@@ -40,11 +40,11 @@ Route::group(['prefix'=>'admin'],function(){
 
 
 		//权限模块
-		Route::get('/premissions','\App\Admin\Controllers\PremissionController@index');
-		Route::get('/premission/create','\App\Admin\Controllers\PremissionController@create');
-		Route::post('/premission/store','\App\Admin\Controllers\PremissionController@store');
-		Route::get('/premission/{premission}/edit','\App\Admin\Controllers\PremissionController@edit');
-		Route::post('/premission/edit','\App\Admin\Controllers\PremissionController@editStore');
+		Route::get('/premissions','\App\Admin\Controllers\AdminPremissionController@index');
+		Route::get('/premission/create','\App\Admin\Controllers\AdminPremissionController@create');
+		Route::post('/premission/store','\App\Admin\Controllers\AdminPremissionController@store');
+		Route::get('/premission/{premission}/edit','\App\Admin\Controllers\AdminPremissionController@edit');
+		Route::post('/premission/{premission}/editStore','\App\Admin\Controllers\AdminPremissionController@editStore');
 
 
 		//文章管理页面
