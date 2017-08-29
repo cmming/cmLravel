@@ -10,7 +10,7 @@
                     <span class="pull-right-container"></span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{url('/admin/permissions')}}"><i class="fa fa-circle-o"></i> 权限管理</a></li>
+                    <li><a href="{{url('/admin/premissions')}}"><i class="fa fa-circle-o"></i> 权限管理</a></li>
                     <li><a href="{{url('/admin/users')}}"><i class="fa fa-circle-o"></i> 用户管理</a></li>
                     <li><a href="{{url('/admin/roles')}}"><i class="fa fa-circle-o"></i> 角色管理</a></li>
                 </ul>
