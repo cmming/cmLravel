@@ -52,4 +52,8 @@ class AdminPremissionController extends Controller
         $Premission->update(request(['name','desc']));
 		return redirect('admin/premissions');
 	}
+	//删除 一个权限 （由于权限和角色有关系，而且角色又和用户有关系，所以这里的删除，有横多关联操作，最后做）
+	public function deleteStore(){
+
+	}
 }

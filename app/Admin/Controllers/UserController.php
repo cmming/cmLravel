@@ -22,7 +22,13 @@ class UserController extends Controller
 	}
 	//管理员创建页面
 	public function create(){
-		return view('/admin/user/create');
+		$formParams = [
+			'isEdit'=>false,
+			'method'=>'post',
+			'url'=>'/admin/users/store',
+			'title'=>'添加用户'
+		];
+		return view('/admin/user/create',compact(['formParams']));
 	}
 	//添加 管理员的记录
 	public function store(){
@@ -65,6 +71,31 @@ class UserController extends Controller
             $user->deleteRole($deleteRole);
 		}
 
+		return redirect('/admin/users');
+
+	}
+	//用户信息修改的 渲染页面
+	public function editUser(AdminUser $user){
+		$formParams = [
+				'isEdit'=>true,
+				'method'=>'post',
+				'url'=>'/admin/users/'.$user->id.'/store',
+				'params'=>$user,
+				'title'=>'修改用户信息'
+		];
+		return view('/admin/user/create',compact(['formParams']));
+	}
+	//修改用户的信息
+	public function editUserInfo(AdminUser $user){
+		//
+		$this->validate(request(),[
+				'name'=>'required|min:3|unique:users,name',
+				'password'=>'required|min:5|confirmed'
+		]);
+		$password = bcrypt(request('password'));
+		$name = request('name');
+		$email = request('email');
+		$user->update(compact('name', 'password'));
 		return redirect('/admin/users');
 
 	}

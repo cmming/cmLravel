@@ -24,7 +24,13 @@ class RoleController extends Controller
 	}
 	//创建角色页面
 	public function create(){
-		return view('admin/role/create');
+		$formParams = [
+				'isEdit'=>false,
+				'method'=>'post',
+				'url'=>'/admin/roles/store',
+				'title'=>'增加角色'
+		];
+		return view('admin/role/create',compact(['formParams']));
 	}
 	//创建角色的行为
 	public function store(){
@@ -68,5 +74,28 @@ class RoleController extends Controller
         return redirect('/admin/roles');
         //获取删除的权限
     }
+	//用户信息修改的 渲染页面
+	public function editRole(AdminRole $role){
+		$formParams = [
+				'isEdit'=>true,
+				'method'=>'post',
+				'url'=>'/admin/roles/'.$role->id.'/edit',
+				'params'=>$role,
+				'title'=>'修改用户信息'
+		];
+		return view('/admin/role/create',compact(['formParams']));
+	}
+	//修改用户的信息 提交页面
+	public function editRoleStore(AdminRole $role){
+		$this->validate(request(),[
+				'name'=>'required|min:3|unique:users,name',
+				'desc'=>'required|min:5'
+		]);
+		$password = bcrypt(request('password'));
+		$name = request('name');
+		$desc = request('desc');
+		$role->update(compact('name', 'desc'));
+		return redirect('/admin/roles');
+	}
 
 }

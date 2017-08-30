@@ -13,16 +13,23 @@
                         <!-- /.box-header -->
                         <div class="box box-primary">
                             <div class="box-header with-border">
-                                <h3 class="box-title">增加用户</h3>
+                                <h3 class="box-title">{{$formParams['title']}}</h3>
                             </div>
                             <!-- /.box-header -->
                             <!-- form start -->
-                            <form role="form" action="{{url('/admin/users/store')}}" method="POST">
+                            {{--{{dd($formParams['url'])}}--}}
+                            <form role="form" action="{{url($formParams['url'])}}" method="{{$formParams['method']}}">
                                 {{csrf_field()}}
+                                {{--{{ method_field($formParams['method']) }}--}}
                                 <div class="box-body">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">用户名</label>
-                                        <input type="text" class="form-control" name="name">
+                                        <input type="text" class="form-control" name="name"
+                                               value=
+                                        @if($formParams['isEdit'])
+                                            {{$formParams['params']['name']}}
+                                        @endif
+                                        >
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">密码</label>

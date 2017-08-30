@@ -28,6 +28,14 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        //权限的注册
+        $premissions = \App\AdminPremission::all();
+//        $premissions = \App\AdminPremission::with('roles')->get();
+//                dd($premissions);
+        foreach($premissions as $premission){
+            Gate::define($premission->name,function($user) use($premission){
+                return $user->hasPremission($premission);
+            });
+        }
     }
 }

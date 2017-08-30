@@ -30,6 +30,7 @@
                                     <td>{{$role->desc}}</td>
                                     <td>
                                         <a type="button" class="btn" href="{{url('/admin/roles/'.$role->id.'/premission')}}" >权限管理</a>
+                                        <a type="button" class="btn" href="{{url('/admin/roles/'.$role->id.'/edit')}}" >修改角色</a>
                                     </td>
                                 </tr>
                                 @endforeach

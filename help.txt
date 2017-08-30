@@ -1,4 +1,14 @@
-0. php artisan key:generate  
+接口开发的动作请求
+
+GET（SELECT）：从服务器取出资源（一项或多项）。
+POST（CREATE）：在服务器新建一个资源。
+PUT（UPDATE）：在服务器更新资源（客户端提供改变后的完整资源）。
+PATCH（UPDATE）：在服务器更新资源（客户端提供改变的属性）。
+DELETE（DELETE）：从服务器删除资源。
+
+
+
+0. php artisan key:generate
 
 1.migration 使用说明
 
@@ -95,6 +105,17 @@
 
 
     页面的搭建
+
+
+    使用gate 制作用户的页面权限控制  用户授权
+
+    1.定义门卫
+    2.使用门卫
+    路由里面使用 middleware=> 'can:system'
+    在blade 里面使用 @can('system')
+    控制器中的使用 $this->authorize('system',$post)
+
+    a.开始注册gate;b.在路由中通过 gate对权限 进行控制 AuthServiceProvider 里面注册 门卫
 
 
 

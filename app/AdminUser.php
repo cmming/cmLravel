@@ -36,7 +36,7 @@ class AdminUser extends Authenticatable
 	//判断一个用户是否拥有 一个或多个 角色
 	public function isInRoles($roles){
 		//intersect 将两个 集合进行做交集
-		return !$roles->intersect($this->roles)->count();
+		return $roles->intersect($this->roles)->count();
 	}
 	//给用户分配角色
 	public function assignRole($roles){

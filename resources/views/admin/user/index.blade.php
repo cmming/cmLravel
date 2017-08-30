@@ -27,6 +27,7 @@
                                     <td>{{$adminUser->name}}</td>
                                     <td>
                                         <a type="button" class="btn" href="{{url('/admin/users/'.$adminUser->id.'/role')}}" >角色管理</a>
+                                        <a type="button" class="btn" href="{{url('/admin/users/'.$adminUser->id.'/create')}}" >修改信息</a>
                                     </td>
                                 </tr>
                                 @endforeach

@@ -30,6 +30,7 @@
                                     <td>{{$premission->desc}}</td>
                                     <td>
                                         <a type="button" class="btn" href="{{url('/admin/premission/'.$premission->id.'/edit')}}" >修改</a>
+                                        <a type="button" class="btn" href="{{url('/admin/premission/'.$premission->id.'/delete')}}" >删除</a>
                                     </td>
                                 </tr>
                                 @endforeach

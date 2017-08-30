@@ -39,7 +39,7 @@ Route::post("/login",'\App\Http\Controllers\LoginController@login');
 Route::get("/logout",'\App\Http\Controllers\LoginController@logout');
 
 
-Route::group(['middleware' => 'auth:web'], function() {
+//Route::group(['middleware' => 'auth:web'], function() {
 	// 个人 设置 中心
 	Route::get("/user/me/setting", '\App\Http\Controllers\UserController@index');
 	// 个人 设置 操作
@@ -78,7 +78,7 @@ Route::group(['middleware' => 'auth:web'], function() {
 	//文章专题投稿
 	Route::post("/topic/{topic}/submit", '\App\Http\Controllers\TopicController@submit');
 
-});
+//});
 //添加管理后台的路由
 include_once "admin.php";
 
