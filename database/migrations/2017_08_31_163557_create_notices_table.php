@@ -15,14 +15,14 @@ class CreateNoticesTable extends Migration
     {
         //系统 通知表
         Schema::create('notices',function(Blueprint $table){
-            $table->integer('id');
+            $table->increments('id');
             $table->string('title',30)->default('');
             $table->string('content',1000)->default('');
             $table->timestamps();
         });
         //系统通知与用户的关系表
         Schema::create('user_notice',function(Blueprint $table){
-            $table->integer('id');
+            $table->increments('id');
             $table->integer('user_id');
             $table->integer('notice_id');
         });

@@ -42,3 +42,22 @@ $('.resource-delete').on('click',function(){
         });
     }
 });
+//删除 通知
+$('.notice-delete').on('click',function(){
+    var r=confirm("是否删除通知"+$(this).attr('delete-title')+'?')
+    if (r==true)
+    {
+        var url = $(this).attr('delete-url');
+        $.ajax({
+            url:url,
+            method:'POST',
+            data:{status:status,'_method':'delete'},
+            dataType:'json',
+            success:function(data){
+                if(data.error ==0){
+                    window.location.reload();
+                }
+            }
+        });
+    }
+});
