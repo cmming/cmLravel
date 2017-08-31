@@ -66,4 +66,14 @@ class User extends Authenticatable
     public function posts(){
         return $this->hasMany('App\Post','user_id','id');
     }
+
+    //用户 与 通知 之间的关联关系
+
+    public function notices(){
+        return $this->belongsToMany('App\Notice','user_notice','user_id','notice_id')->withPivot('user_id','notice_id');
+    }
+    //给用户增加通知
+    public function addNotice($notice){
+        $this->notices()->save($notice);
+    }
 }

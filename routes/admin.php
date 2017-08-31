@@ -63,6 +63,15 @@ Route::group(['prefix'=>'admin'],function(){
 			//修改文章的 状态
 			Route::post('/posts/{post}/status','\App\Admin\Controllers\PostController@status');
 		});
-
+		//专题模块 列表 增加 修改 使用 资源型(resource) 进行数据的获取
+		Route::group(['middleware'=>'can:topic'],function(){
+			//专题管理页面
+			Route::resource('topics','\App\Admin\Controllers\TopicController',['only'=>['index','create','store','destroy','edit','update']]);
+		});
+		//通知模块 列表 增加 修改 使用 资源型(resource) 进行数据的获取
+		Route::group(['middleware'=>'can:notice'],function(){
+			//专题管理页面
+			Route::resource('notices','\App\Admin\Controllers\NoticeController',['only'=>['index','create','store','destroy','edit','update']]);
+		});
 	});
 });
