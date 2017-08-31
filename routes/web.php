@@ -78,6 +78,10 @@ Route::get("/logout",'\App\Http\Controllers\LoginController@logout');
 	//文章专题投稿
 	Route::post("/topic/{topic}/submit", '\App\Http\Controllers\TopicController@submit');
 
+//添加通知 模块
+	Route::get("/notices", '\App\Http\Controllers\NoticeController@index');
+
+
 //});
 //添加管理后台的路由
 include_once "admin.php";

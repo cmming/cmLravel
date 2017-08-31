@@ -11,6 +11,7 @@ namespace App\Admin\Controllers;
 use Illuminate\Http\Request;
 use App\Admin\Controllers\Controller;
 use App\Notice;
+use App\Jobs\SendNotice;
 
 class NoticeController extends Controller
 {
@@ -22,7 +23,7 @@ class NoticeController extends Controller
 	//添加
 	public function create(){
 		$formParams = [
-				'isEdit'=>true,
+				'isEdit'=>false,
 				'method'=>'post',
 				'url'=>'/admin/notices',
 				'title'=>'添加通知'
@@ -35,7 +36,9 @@ class NoticeController extends Controller
 			'title'=>'required',
 			'content'=>'required'
 		]);
-		Notice::create(request(['title','content']));
+		$notice = Notice::create(request(['title','content']));
+		//在这里 让通知在创建的时候默认发给前台的每一个用户(触发队列任务) dispatch
+		dispatch(new SendNotice($notice));
 		return redirect('admin/notices');
 	}
 	//删除
