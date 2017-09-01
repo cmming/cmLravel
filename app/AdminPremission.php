@@ -16,4 +16,6 @@ class AdminPremission extends Model
 		return $this->belongsToMany('App\AdminRole','admin_premission_role','premission_id','role_id')->withPivot(['premission_id','role_id']);
 	}
 	//
+//	public function
+
 }

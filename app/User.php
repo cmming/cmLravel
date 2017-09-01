@@ -88,4 +88,15 @@ class User extends Authenticatable
     public function deleteRole($role){
         $this->roles()->detach($role);
     }
+
+    //判断一个用户是否拥有 一个或多个 角色
+    public function isInRoles($roles){
+        //intersect 将两个 集合进行做交集
+        return $roles->intersect($this->roles)->count();
+    }
+    //用户 是否有权限
+    public function hasPremission($premission){
+        // 判断用户的角色 和  这个权限所属有的角色是否 拥有重叠 即可
+        return $this->isInRoles($premission->roles);
+    }
 }

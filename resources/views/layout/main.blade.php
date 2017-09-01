@@ -37,9 +37,11 @@
             <li>
                 <a class="blog-nav-item " href="{{ url('/posts') }}">首页</a>
             </li>
+            @can('post')
             <li>
                 <a class="blog-nav-item" href="{{ url('/posts/create')}}">写文章</a>
             </li>
+            @endif
             <li>
                 <a class="blog-nav-item" href="{{ url('/notices')}}">通知</a>
             </li>

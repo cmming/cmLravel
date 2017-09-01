@@ -40,6 +40,19 @@ Route::get("/logout",'\App\Http\Controllers\LoginController@logout');
 
 
 //Route::group(['middleware' => 'auth:web'], function() {
+	Route::group(['middleware' =>'can:post'],function(){
+		//创建页面
+		Route::get("/posts/create", "\App\Http\Controllers\PostController@create");
+		//创建 的逻辑
+		Route::post("/posts", "\App\Http\Controllers\PostController@store");
+		//编辑
+		Route::get("/posts/{post}/edit", "\App\Http\Controllers\PostController@edit");
+		//提交
+		Route::put("/posts/{post}", "\App\Http\Controllers\PostController@update");
+		//删除
+		Route::get("/posts/{post}/delete", "\App\Http\Controllers\PostController@delete");
+	});
+
 	// 个人 设置 中心
 	Route::get("/user/me/setting", '\App\Http\Controllers\UserController@index');
 	// 个人 设置 操作
@@ -48,19 +61,10 @@ Route::get("/logout",'\App\Http\Controllers\LoginController@logout');
 
 	//1.列表页面
 	Route::get("/posts", '\App\Http\Controllers\PostController@index');
-	//创建
-	Route::post("/posts", "\App\Http\Controllers\PostController@store");
-	Route::get("/posts/create", "\App\Http\Controllers\PostController@create");
 	// 图片上传
 	Route::get("/posts/image/upload", "\App\Http\Controllers\PostController@imageUpload");
 	//2.文章的详情页面
 	Route::get("/posts/{post}", "\App\Http\Controllers\PostController@show");
-	//编辑
-	Route::get("/posts/{post}/edit", "\App\Http\Controllers\PostController@edit");
-	//提交
-	Route::put("/posts/{post}", "\App\Http\Controllers\PostController@update");
-	//删除
-	Route::get("/posts/{post}/delete", "\App\Http\Controllers\PostController@delete");
 	// 提交评论
 	Route::post("/posts/{post}/comment", '\App\Http\Controllers\PostController@comment');
 	// 赞

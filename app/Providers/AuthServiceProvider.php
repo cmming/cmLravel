@@ -37,5 +37,13 @@ class AuthServiceProvider extends ServiceProvider
                 return $user->hasPremission($premission);
             });
         }
+//        Gate::after(function ($user,$ability) {
+//            //权限的名称 为 $ability
+//            dd($user);
+//            dd($ability);
+//            dd($this->authorizeForUser($user, $ability));
+//            $this->authorizeForUser($user, $ability);
+//        });
+
     }
 }
