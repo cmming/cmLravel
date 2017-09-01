@@ -73,5 +73,18 @@ Route::group(['prefix'=>'admin'],function(){
 			//专题管理页面
 			Route::resource('notices','\App\Admin\Controllers\NoticeController',['only'=>['index','create','store','destroy','edit','update']]);
 		});
+		//通知模块 列表 增加 修改 使用 资源型(resource) 进行数据的获取
+		Route::group(['middleware'=>'can:postUser'],function(){
+			//使用资源的方式 获取 前台的作者
+			Route::resource('postUsers','\App\Admin\Controllers\PostUserController',['only'=>'index']);
+			//添加角色
+			Route::get('/postUsers/create','\App\Admin\Controllers\PostUserController@create');
+			Route::post('/postUsers/store','\App\Admin\Controllers\PostUserController@store');
+			Route::get('/postUsers/{postUser}/role','\App\Admin\Controllers\PostUserController@role');
+			Route::get('/postUsers/{postUser}/edit','\App\Admin\Controllers\PostUserController@edit');
+			Route::put('/postUsers/{postUser}','\App\Admin\Controllers\PostUserController@update');
+			//修改用户的角色
+			Route::post('/postUsers/{postUser}/role','\App\Admin\Controllers\PostUserController@roleStore');
+		});
 	});
 });

@@ -76,4 +76,16 @@ class User extends Authenticatable
     public function addNotice($notice){
         $this->notices()->save($notice);
     }
+    //前台用户的 与权限的 关系表
+    public function roles(){
+        return $this->belongsToMany('App\AdminRole','user_roles','user_id','roles_id')->withPivot('user_id','roles_id');
+    }
+    //为用户添加一个角色
+    public function addRole($role){
+        $this->roles()->save($role);
+    }
+    //为用户删除一个角色
+    public function deleteRole($role){
+        $this->roles()->detach($role);
+    }
 }

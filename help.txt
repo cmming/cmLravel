@@ -131,7 +131,7 @@ DELETE（DELETE）：从服务器删除资源。
     resources （首页）                    get         resources/index             index
     resources（创建）                     get         resources/create            create
     resources（保存）                     post        resources/store             store
-    resources（详情）                     get         resources/{resource}/show        show
+    resources（详情）                     get         resources/{resource}/show   show
     resources（修改页面）                 get         resources/{resource}/edit   edit
     resources（提交更新）                 put/patch   resources/{resource}        update
     resources（删除）                     delete      resources/{resource}        destory
@@ -160,6 +160,10 @@ DELETE（DELETE）：从服务器删除资源。
             使用命令 将队列开启
         c5 系统队列的实现
 
+
+    添加作者管理模块
+
+    1.添加作者管理 权限 添加 user_roles 关系表进行前台的用户权限关联
 
 
 

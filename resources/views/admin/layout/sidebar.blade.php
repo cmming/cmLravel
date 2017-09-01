@@ -14,6 +14,9 @@
                     <li><a href="{{url('/admin/premissions')}}"><i class="fa fa-circle-o"></i> 权限管理</a></li>
                     <li><a href="{{url('/admin/users')}}"><i class="fa fa-circle-o"></i> 用户管理</a></li>
                     <li><a href="{{url('/admin/roles')}}"><i class="fa fa-circle-o"></i> 角色管理</a></li>
+                    @can('postUser')
+                    <li><a href="{{url('/admin/postUsers')}}"><i class="fa fa-circle-o"></i> 前台用户管理</a></li>
+                    @endcan
                 </ul>
             </li>
             @endcan
