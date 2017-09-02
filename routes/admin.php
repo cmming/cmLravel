@@ -8,7 +8,7 @@
 
 //添加管理后台的路由
 Route::group(['prefix'=>'admin'],function(){
-	Route::get('/login','\App\Admin\Controllers\LoginController@index')->name('login');
+	Route::get('/login','\App\Admin\Controllers\LoginController@index')->name('admin.login');
 	Route::post('/login','\App\Admin\Controllers\LoginController@login');
 	Route::get('/logout','\App\Admin\Controllers\LoginController@logout');
 	//增加一个 MIDDLEWARE 需要登录

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use App\AdminPremission;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -34,16 +35,22 @@ class AuthServiceProvider extends ServiceProvider
 //                dd($premissions);
         foreach($premissions as $premission){
             Gate::define($premission->name,function($user) use($premission){
+//                dd($premission);
                 return $user->hasPremission($premission);
             });
         }
-//        Gate::after(function ($user,$ability) {
-//            //权限的名称 为 $ability
-//            dd($user);
+
+        Gate::after(function ($user,$ability) {
+//            $abilitys = AdminPremission::where('name','=',$ability);
+////            $abilitys = AdminPremission::where('name','=',$ability);
+////            //权限的名称 为 $ability
+//            dd($ability,$abilitys->get(['id']),$user->roles);
+////            dd($abilitys->getModel()->roles());
+//            dd($user->isInRoles($abilitys->getModel()->roles));
 //            dd($ability);
 //            dd($this->authorizeForUser($user, $ability));
 //            $this->authorizeForUser($user, $ability);
-//        });
+        });
 
     }
 }

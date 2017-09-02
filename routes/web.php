@@ -26,20 +26,20 @@ Route::get('/','\APP\Http\Controllers\LoginController@index');
  * 路由 注册注册的 顺序从特殊到普通。否则会报错，http://cache.baiducontent.com/c?m=9f65cb4a8c8507ed4fece763101d8c24431697634b868d4a6291c4188e3a08011422b4e53a7c434480812b3916af3f08aaad6933200357eddd97d65e98e6d27e20d47a23706dc506459352b8cb37659661d704afee0ee7cba46fd3b9d2a28009059d0d127af1e78b2b1715ba3cb25626e2d68e4f644811caaf6d24b94e7758882337&p=90759a46d6c919fc57efd52c1741c1&newp=9a7dc54ad5c34bdd10be9b7c500acd231610db2151d1da01298ffe0cc4241a1a1a3aecbf21251405d8c77b6100a5485bebfb3c71310434f1f689df08d2ecce7e5dc0&user=baidu&fm=sc&query=No+query+results+for+model+%5BApp%5CPost%5D%2E&qid=b71c008a0007380f&p1=2
  * 路由传递对象的时候 也应该是用单数形式 要不报错
  */
-
+Route::get("/",'\App\Http\Controllers\PostController@index');
 // 页面的注册
 Route::get("/register",'\App\Http\Controllers\RegisterController@index');
 // 注册的行为
 Route::post("/register",'\App\Http\Controllers\RegisterController@register');
 // 登录页面
-Route::get("/login",'\App\Http\Controllers\LoginController@index')->name('login');
+Route::get("/login",'\App\Http\Controllers\LoginController@index');
 // 登录行为
-Route::post("/login",'\App\Http\Controllers\LoginController@login');
+Route::post("/login",'\App\Http\Controllers\LoginController@login')->name('login');
 // 登出行为
 Route::get("/logout",'\App\Http\Controllers\LoginController@logout');
 
 
-//Route::group(['middleware' => 'auth:web'], function() {
+Route::group(['middleware' => 'auth:web'], function() {
 	Route::group(['middleware' =>'can:post'],function(){
 		//创建页面
 		Route::get("/posts/create", "\App\Http\Controllers\PostController@create");
@@ -52,6 +52,7 @@ Route::get("/logout",'\App\Http\Controllers\LoginController@logout');
 		//删除
 		Route::get("/posts/{post}/delete", "\App\Http\Controllers\PostController@delete");
 	});
+});
 
 	// 个人 设置 中心
 	Route::get("/user/me/setting", '\App\Http\Controllers\UserController@index');
@@ -60,7 +61,7 @@ Route::get("/logout",'\App\Http\Controllers\LoginController@logout');
 
 
 	//1.列表页面
-	Route::get("/posts", '\App\Http\Controllers\PostController@index');
+	Route::get("/posts", '\App\Http\Controllers\PostController@index')->name('post.default');
 	// 图片上传
 	Route::get("/posts/image/upload", "\App\Http\Controllers\PostController@imageUpload");
 	//2.文章的详情页面
@@ -86,9 +87,11 @@ Route::get("/logout",'\App\Http\Controllers\LoginController@logout');
 	Route::get("/notices", '\App\Http\Controllers\NoticeController@index');
 
 
-//});
+
 //添加管理后台的路由
 include_once "admin.php";
+//错误的路由
+Route::get("/error/404", '\App\Http\Controllers\ErrorController@error404')->name('error.404');
 
 
 
