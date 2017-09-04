@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 use App\Admin\Controllers\Controller;
 use App\User;
 use App\AdminRole;
+use App\Notice;
+use Illuminate\Contracts\Mail;
 
 class PostUserController extends Controller
 {
@@ -87,6 +89,53 @@ class PostUserController extends Controller
 		]);
 		$postUser->update(request(['name']));
 		return redirect('admin/postUsers');
+	}
+	//用户与通知的关联
+	public function notice(User $postUser)
+	{
+		//获取所有的通知模版
+		$notices = Notice::orderBy('created_at','desc')->paginate(6);
+		//已经拥有的通知
+		$mynotices = $postUser->notices;
+		//跳转到通知模版页面
+		return view('admin/postUser/notice',compact(['notices','postUser','mynotices']));
+	}
+	//为用户发送通知
+	public function noticeStore(User $postUser){
+		//验证数据
+		$this->validate(request(),[
+			'notices'=>'array'
+		]);
+		//已经选中的通知
+		$check_notice = Notice::findMany(request('notices'));
+		//已经发送了的通知
+		$my_notice = $postUser->notices;
+		//需要添加的
+		$add_notices = $check_notice->diff($my_notice);
+		foreach ($add_notices as $item) {
+			$postUser->addNotice($item);
+		}
+		//要删除的通知
+		$delete_notice = $my_notice->diff($check_notice);
+		foreach($delete_notice as $item){
+			$postUser->deleteNotice($item);
+		}
+		return redirect('admin/postUsers');
+	}
+	public function mail(){
+		\Mail::raw('邮件内容',function($message){
+			$message->from('13037125104@163.com','陈明');
+			$message->subject('主题');
+			$message->to('294225707@qq.com');
+		});
+	}
+	//发送 html 的邮件
+	public function mailHtml(){
+		\Mail::send('mail.index',['name'=>'chenming'],function($message){
+			$message->from('13037125104@163.com','陈明');
+			$message->subject('html邮件');
+			$message->to('294225707@qq.com');
+		});
 	}
 
 }

@@ -13,6 +13,12 @@ Route::group(['prefix'=>'admin'],function(){
 	Route::get('/logout','\App\Admin\Controllers\LoginController@logout');
 	//增加一个 MIDDLEWARE 需要登录
 	Route::group(['middleware'=>'auth:admin'],function(){
+		Route::get('/mail','\App\Admin\Controllers\PostUserController@mail');
+		Route::get('/mailHtml','\App\Admin\Controllers\PostUserController@mailHtml');
+		//发送邮件的页面
+		Route::get('/sendEmail/{mail}','\App\Admin\Controllers\MailController@sendEmail');
+		//发送邮件的 队列
+		
 		//定义页面的 首页
 		Route::get('/home','\App\Admin\Controllers\HomeController@index');
 		//添加权限管理的控制器
@@ -43,6 +49,9 @@ Route::group(['prefix'=>'admin'],function(){
 			//角色与权限关系
 			Route::get('/roles/{role}/premission','\App\Admin\Controllers\RoleController@premission');
 			Route::post('/roles/{role}/premission','\App\Admin\Controllers\RoleController@premissionStore');
+
+			//邮件模版页面
+			Route::resource('mails','\App\Admin\Controllers\MailController');
 
 
 
@@ -85,6 +94,9 @@ Route::group(['prefix'=>'admin'],function(){
 			Route::put('/postUsers/{postUser}','\App\Admin\Controllers\PostUserController@update');
 			//修改用户的角色
 			Route::post('/postUsers/{postUser}/role','\App\Admin\Controllers\PostUserController@roleStore');
+			//为前端用户发送消息
+			Route::get('/postUsers/{postUser}/notice','\App\Admin\Controllers\PostUserController@notice');
+			Route::post('/postUsers/{postUser}/notice','\App\Admin\Controllers\PostUserController@noticeStore');
 		});
 	});
 });

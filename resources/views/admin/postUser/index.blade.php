@@ -28,6 +28,7 @@
                                         <td>
                                             <a type="button" class="btn" href="{{url('/admin/postUsers/'.$postUser->id.'/role')}}" >角色管理</a>
                                             <a type="button" class="btn" href="{{url('/admin/postUsers/'.$postUser->id.'/edit')}}" >修改信息</a>
+                                            <a type="button" class="btn" href="{{url('/admin/postUsers/'.$postUser->id.'/notice')}}" >发送消息</a>
                                         </td>
                                     </tr>
                                 @endforeach

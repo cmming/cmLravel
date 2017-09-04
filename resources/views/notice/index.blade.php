@@ -7,6 +7,9 @@
                 <p>{{$notice->content}}</p>
             </div>
             @endforeach
+        @if(!count($notices))
+            没有通知！
+            @endif
     </div><!-- /.blog-main -->
 
 @endsection

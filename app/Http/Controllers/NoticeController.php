@@ -9,7 +9,7 @@ class NoticeController extends Controller
 {
     //
 	public function index(){
-		$notices = Notice::orderBy('created_at','desc')->paginate(2);
+		$notices = \Auth::user()->notices()->orderBy('created_at','desc')->paginate(2);
 		return view('notice/index',compact(['notices']));
 	}
 }

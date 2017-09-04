@@ -99,4 +99,8 @@ class User extends Authenticatable
         // 判断用户的角色 和  这个权限所属有的角色是否 拥有重叠 即可
         return $this->isInRoles($premission->roles);
     }
+    //为用户删除一个角色
+    public function deleteNotice($notice){
+        $this->notices()->detach($notice);
+    }
 }

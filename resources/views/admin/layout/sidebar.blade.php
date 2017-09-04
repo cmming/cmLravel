@@ -17,6 +17,7 @@
                     @can('postUser')
                     <li><a href="{{url('/admin/postUsers')}}"><i class="fa fa-circle-o"></i> 前台用户管理</a></li>
                     @endcan
+                    <li><a href="{{url('/admin/mails')}}"><i class="fa fa-dashboard"></i>邮件模版管理</a></li>
                 </ul>
             </li>
             @endcan

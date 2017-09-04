@@ -26,6 +26,7 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot();
+//        dd(Route::currentRouteAction());
     }
 
     /**

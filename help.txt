@@ -138,6 +138,18 @@ DELETE（DELETE）：从服务器删除资源。
 
 
 
+
+     GET|HEAD  | admin/mails                             | mails.index     | \App\Admin\Controllers\MailController@index                  | web,auth:admin,can:system   |
+    |        | POST      | admin/mails                             | mails.store     | \App\Admin\Controllers\MailController@store                  | web,auth:admin,can:system   |
+    |        | GET|HEAD  | admin/mails/create                      | mails.create    | \App\Admin\Controllers\MailController@create                 | web,auth:admin,can:system   |
+    |        | PUT|PATCH | admin/mails/{mail}                      | mails.update    | \App\Admin\Controllers\MailController@update                 | web,auth:admin,can:system   |
+    |        | GET|HEAD  | admin/mails/{mail}                      | mails.show      | \App\Admin\Controllers\MailController@show                   | web,auth:admin,can:system   |
+    |        | DELETE    | admin/mails/{mail}                      | mails.destroy   | \App\Admin\Controllers\MailController@destroy                | web,auth:admin,can:system   |
+    |        | GET|HEAD  | admin/mails/{mail}/edit                 | mails.edit      | \App\Admin\Controllers\MailController@edit                   | web,auth:admin,can:system   |
+
+
+
+
     使用队列的方式 进行对用户进行发送通知
 
     1.表结构设计 系统通知表 和 用户与通知的关系表
@@ -166,6 +178,17 @@ DELETE（DELETE）：从服务器删除资源。
     1.添加作者管理 权限 添加 user_roles 关系表进行前台的用户权限关联
 
     2.前台页面对不同的用户 进行权限的控制
+
+
+
+    为用户发送邮件功能
+    添加邮件模版表
+
+    发送邮件
+    配置
+
+
+
 
 
 

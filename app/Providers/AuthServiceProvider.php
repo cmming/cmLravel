@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use App\AdminPremission;
+use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,9 +26,9 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(GateContract $gate)
     {
-        $this->registerPolicies();
+        $this->registerPolicies($gate);
 
         //权限的注册
         $premissions = \App\AdminPremission::all();
@@ -40,17 +41,15 @@ class AuthServiceProvider extends ServiceProvider
             });
         }
 
-        Gate::after(function ($user,$ability) {
-//            $abilitys = AdminPremission::where('name','=',$ability);
-////            $abilitys = AdminPremission::where('name','=',$ability);
-////            //权限的名称 为 $ability
-//            dd($ability,$abilitys->get(['id']),$user->roles);
-////            dd($abilitys->getModel()->roles());
-//            dd($user->isInRoles($abilitys->getModel()->roles));
-//            dd($ability);
-//            dd($this->authorizeForUser($user, $ability));
-//            $this->authorizeForUser($user, $ability);
-        });
+//        Gate::after(function ($user,$ability){
+//            //这里面 找到的是 一个集合对象 （注意 会有key ）
+//            $premission = AdminPremission::where('name','=',$ability)->first();
+//            //判断用户的是否 拥有该权限
+//            $is_can = $user->hasPremission($premission);
+//            if(!$is_can){
+//                return \App::abort('404');
+//            }
+//        });
 
     }
 }
