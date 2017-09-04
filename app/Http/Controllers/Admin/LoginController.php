@@ -6,10 +6,10 @@
  * Time: 13:47
  */
 
-namespace App\Admin\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Admin\Controllers\Controller;
+use App\Http\Controllers\Controller;
 
 class LoginController extends Controller
 {

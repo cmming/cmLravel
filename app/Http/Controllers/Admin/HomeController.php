@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Admin\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Admin\Controllers\Controller;
+use App\Http\Controllers\Controller;
 use App\Post;
 
 class HomeController extends Controller

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Admin\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Jobs\SendEmailJob;
 use Illuminate\Http\Request;
-use App\Admin\Controllers\Controller;
+use App\Http\Controllers\Controller;
 use App\Mail;
 use App\User;
 
@@ -68,4 +69,16 @@ class MailController extends Controller
 		$all_users = User::orderBy('created_at','desc')->get();
 		return view('admin/mail/sendEmail',compact(['all_users','mail']));
 	}
+	public function sendEmailStore(){
+	    $this->validate(request(),[
+	        'users'=>'array'
+        ]);
+	    $to_users = request('users');
+	    $mail_subject = request(['title']);
+	    $mail_content = request(['content']);
+	    //使用队列进行发送邮件
+        dispatch(new SendEmailJob($to_users,request(['title','content'])));
+
+	    return redirect('admin/mails');
+    }
 }

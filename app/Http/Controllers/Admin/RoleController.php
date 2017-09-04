@@ -6,10 +6,10 @@
  * Time: 16:05
  */
 
-namespace App\Admin\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Admin\Controllers\Controller;
+use App\Http\Controllers\Controller;
 use App\AdminUser;
 use App\AdminRole;
 use App\AdminPremission;

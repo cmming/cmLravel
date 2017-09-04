@@ -24,20 +24,20 @@
                                         @foreach($all_users as $all_user)
                                             <label>
                                                 <input type="checkbox" name="users[]"
-                                                       value="{{$all_user->id}}">
-                                                {{$all_user->name}}
+                                                       value="{{$all_user->email}}">
+                                                {{$all_user->name}} ({{$all_user->email}})
                                             </label>
                                         @endforeach
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="name">邮件的标题</label>
-                                    <input type="text" class="form-control" id="name" placeholder="请输入名称" value="{{$mail->title}}">
+                                    <input type="text" class="form-control" id="name" name = 'title' placeholder="请输入邮件标题" value="{{$mail->title}}">
 
                                 </div>
                                 <div class="form-group">
                                     <label for="name">邮件的内容</label>
-                                    <input type="text" class="form-control" id="name" placeholder="请输入名称" value="{{$mail->content}}">
+                                    <input type="text" class="form-control" id="name" name = 'content' placeholder="请输入邮件内容" value="{{$mail->content}}">
                                 </div>
                                 <div class="box-footer">
                                     <button type="submit" class="btn btn-primary">发送邮件</button>
